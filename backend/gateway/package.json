@@ -1,0 +1,32 @@
+{
+  "name": "blog",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node index.js",
+    "start-gateway": "nodemon gateway.js",
+    "start-service-users": "nodemon ../services/users/index.js",
+    "start-service-foods": "nodemon ../services/foods/index.js",
+    "start-services": "concurrently \"npm:start-service-*\"",
+    "postinstall": "lerna bootstrap"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "latest",
+    "lerna": "latest",
+    "nodemon": "latest"
+  },
+  "dependencies": {
+    "@apollo/gateway": "latest",
+    "@hapi/joi": "^17.1.1",
+    "apollo-server": "latest",
+    "dotenv": "^10.0.0",
+    "graphql": "latest",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.12.13"
+  }
+}
