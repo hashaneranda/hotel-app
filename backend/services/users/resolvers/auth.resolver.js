@@ -13,7 +13,7 @@ module.exports = {
       const tokens = await tokenService.generateAuthTokens(user);
 
       return {
-        success: user ? true : false,
+        success: !!user,
         token: tokens,
         user: user,
       };
@@ -31,7 +31,7 @@ module.exports = {
       user = await userService.getUserById(user._id);
 
       return {
-        success: user ? true : false,
+        success: !!user,
         token: tokens,
         user: user,
       };
