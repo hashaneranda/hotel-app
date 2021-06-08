@@ -1,6 +1,6 @@
 const { ApolloServer } = require("apollo-server");
 const { ApolloGateway, RemoteGraphQLDataSource } = require("@apollo/gateway");
-const jwt = require("jsonwebtoken");
+const { getUser } = require("./middleware/auth");
 
 const users = [
   {
@@ -42,16 +42,27 @@ const gateway = new ApolloGateway({
 const server = new ApolloServer({
   gateway,
   subscriptions: false,
-  context: async ({ req }) => {
-    let token = req.headers.authorization || null;
-    if (token) {
-      try {
-        const { id } = await jwt.verify(token, "secret");
-        const user = users.find((u) => u.id === id);
-        return { user };
-      } catch (ex) {
-        return { user: null };
-      }
+  context: async ({ req, res, connection }) => {
+    // let token = req.headers.authorization || null;
+    // if (token) {
+    //   try {
+    //     const { id } = await jwt.verify(token, "secret");
+    //     const user = users.find((u) => u.id === id);
+    //     return { user };
+    //   } catch (ex) {
+    //     return { user: null };
+    //   }
+    // }
+
+    if (req) {
+      let me = await getUser(req);
+
+      return {
+        me,
+        // models: models,
+        req,
+        res,
+      };
     }
   },
 });

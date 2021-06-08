@@ -24,9 +24,12 @@
     "@apollo/gateway": "latest",
     "@hapi/joi": "^17.1.1",
     "apollo-server": "latest",
+    "bcryptjs": "^2.4.3",
     "dotenv": "^10.0.0",
     "graphql": "latest",
+    "graphql-resolvers": "^0.4.2",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.12.13"
+    "mongoose": "^5.12.13",
+    "validator": "^13.6.0"
   }
 }
