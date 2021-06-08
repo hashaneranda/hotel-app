@@ -1,4 +1,4 @@
-const { ApolloServer, gql } = require("apollo-server");
+const { ApolloServer } = require("apollo-server");
 const { buildFederatedSchema } = require("@apollo/federation");
 
 const resolvers = require("./resolvers");
