@@ -8,7 +8,6 @@
     "dev": "node index.js",
     "start-gateway": "nodemon gateway.js",
     "start-service-users": "nodemon ../services/users/index.js",
-    "start-service-foods": "nodemon ../services/foods/index.js",
     "start-services": "concurrently \"npm:start-service-*\"",
     "postinstall": "lerna bootstrap"
   },
