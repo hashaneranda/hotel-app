@@ -33,8 +33,8 @@ const gateway = new ApolloGateway({
     new RemoteGraphQLDataSource({
       url,
       willSendRequest: ({ request, context }) => {
-        if (context.user)
-          request.http.headers.set("user", JSON.stringify(context.user));
+        if (context.me)
+          request.http.headers.set("user", JSON.stringify(context.me));
       },
     }),
 });
@@ -43,23 +43,11 @@ const server = new ApolloServer({
   gateway,
   subscriptions: false,
   context: async ({ req, res, connection }) => {
-    // let token = req.headers.authorization || null;
-    // if (token) {
-    //   try {
-    //     const { id } = await jwt.verify(token, "secret");
-    //     const user = users.find((u) => u.id === id);
-    //     return { user };
-    //   } catch (ex) {
-    //     return { user: null };
-    //   }
-    // }
-
     if (req) {
       let me = await getUser(req);
 
       return {
         me,
-        // models: models,
         req,
         res,
       };
