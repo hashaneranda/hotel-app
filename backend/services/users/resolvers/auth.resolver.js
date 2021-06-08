@@ -4,6 +4,12 @@ const authService = require("../services/auth.service");
 const tokenService = require("../services/token.service");
 
 module.exports = {
+  User: {
+    async __resolveReference(object) {
+      let user = await userService.getUserById(object.id);
+      return user;
+    },
+  },
   Query: {
     loginUser: async (_, { email, password }) => {
       let user = await authService.loginUserWithEmailAndPassword(
