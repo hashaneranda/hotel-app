@@ -20,6 +20,15 @@ const getOrderById = async (id) => {
 };
 
 /**
+ * Get Order by user
+ * @param {ObjectId} userid
+ * @returns {Promise<Order>}
+ */
+const getOrderByUser = async (user) => {
+  return Order.find({ user });
+};
+
+/**
  * Get all Orders
  * @returns {Promise<Order>}
  */
@@ -31,4 +40,5 @@ module.exports = {
   createOrder,
   getOrderById,
   getAllOrder,
+  getOrderByUser,
 };

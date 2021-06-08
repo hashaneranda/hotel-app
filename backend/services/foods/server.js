@@ -54,6 +54,10 @@ const server = new ApolloServer({
       typeDefs: typeDefs.foodSchema,
       resolvers: resolvers.foodResolver,
     },
+    {
+      typeDefs: typeDefs.orderSchema,
+      resolvers: resolvers.orderResolver,
+    },
   ]),
   context: ({ req }) => {
     const me = req.headers.user;

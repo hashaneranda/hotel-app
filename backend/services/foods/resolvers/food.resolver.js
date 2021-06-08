@@ -11,6 +11,10 @@ module.exports = {
     addedBy(food) {
       return { __typename: "User", id: food.addedBy };
     },
+    async __resolveReference(object) {
+      let food = await foodService.getFoodById(object.id);
+      return food;
+    },
   },
   Query: {
     fetchAllFoods: combineResolvers(isAuthenticated, async (_, args) => {

@@ -26,7 +26,6 @@ const typeDefs = gql`
 
   extend type Query {
     loginUser(email: String!, password: String!): UserResponse!
-    userByID(id: ID!): User!
   }
 
   extend type Mutation {

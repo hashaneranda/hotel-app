@@ -1,8 +1,6 @@
 const { gql } = require("apollo-server");
 
 const typeDefs = gql`
-  scalar Date
-
   type Food @key(fields: "id") {
     id: ID!
     name: String!
