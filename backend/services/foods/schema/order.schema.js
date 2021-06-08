@@ -11,7 +11,7 @@ const typeDefs = gql`
   }
 
   type OrderItem {
-    food: Food!
+    food: Food
     quantity: Int!
   }
 

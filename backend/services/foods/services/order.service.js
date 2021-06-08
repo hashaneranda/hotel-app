@@ -25,7 +25,7 @@ const getOrderById = async (id) => {
  * @returns {Promise<Order>}
  */
 const getOrderByUser = async (user) => {
-  return Order.find({ user });
+  return Order.find({ user }).populate("order.food");
 };
 
 /**

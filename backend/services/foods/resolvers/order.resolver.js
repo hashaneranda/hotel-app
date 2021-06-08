@@ -35,6 +35,8 @@ module.exports = {
       async (_, args, { me }) => {
         let orders = await orderService.getOrderByUser(me.id);
 
+        console.log("orders", orders[0].order);
+
         return {
           success: !!orders,
           data: orders,
