@@ -1,19 +1,28 @@
-const { merge } = require("webpack-merge");
+const { mergeWithCustomize, unique } = require("webpack-merge");
 const singleSpaDefaults = require("webpack-config-single-spa");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
-module.exports = (webpackConfigEnv, argv) => {
+const merge = mergeWithCustomize({
+  customizeArray: unique(
+    "plugins",
+    ["HtmlWebpackPlugin"],
+    (plugin) => plugin.constructor && plugin.constructor.name
+  ),
+});
+
+module.exports = (webpackConfigEnv) => {
   const orgName = "hotel";
   const defaultConfig = singleSpaDefaults({
     orgName,
     projectName: "root-config",
     webpackConfigEnv,
-    argv,
-    disableHtmlGeneration: true,
   });
 
   return merge(defaultConfig, {
     // modify the webpack config however you'd like to by adding to this object
+    devServer: {
+      historyApiFallback: true,
+    },
     plugins: [
       new HtmlWebpackPlugin({
         inject: false,
@@ -24,17 +33,5 @@ module.exports = (webpackConfigEnv, argv) => {
         },
       }),
     ],
-    devServer: {
-      onListening: ({ compiler }) => {
-        const { https, client } = compiler.options.devServer;
-        const { publicPath, filename } = compiler.options.output;
-        const protocol = https ? "https://" : "http://";
-        const port = !client.port ? "" : `:${client.port}`;
-        const path = ["", "auto"].includes(publicPath) ? "/" : publicPath;
-        console.log(
-          `⚡️ single-spa root-config URL: ${protocol}${client.host}${port}${path}${filename}`
-        );
-      },
-    },
   });
 };

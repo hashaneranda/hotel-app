@@ -26,7 +26,8 @@ export const shake = keyframes`
 `;
 
 export const StyledButton = styled.button`
-  background: papayawhip;
+  background-color: ${(props) => props.theme.palette.typography.main};
+  color: ${(props) => props.theme.palette.background.main};
   border: none;
   border-radius: 0.3rem;
   font-size: 1rem;

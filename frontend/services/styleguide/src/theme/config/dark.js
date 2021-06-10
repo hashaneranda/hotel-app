@@ -5,6 +5,9 @@ const theme = {
   title: "dark",
   ...shared,
   palette: {
+    primary: {
+      main: "#233253",
+    },
     typography: {
       main: "#fff",
       secondary: "#b3b3b3",

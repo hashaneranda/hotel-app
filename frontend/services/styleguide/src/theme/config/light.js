@@ -4,6 +4,9 @@ const light = {
   title: "light",
   ...shared,
   palette: {
+    primary: {
+      main: "#233253",
+    },
     typography: {
       main: "#11263C",
       secondary: "#616161",
