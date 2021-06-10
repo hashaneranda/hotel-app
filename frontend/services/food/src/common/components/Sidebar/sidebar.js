@@ -6,13 +6,12 @@
  * Date: 27-01-2020
  */
 
-import React, { useState } from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
 import Tooltip from "@material-ui/core/Tooltip";
-import { useHistory } from "react-router-dom";
 
 //images
-import { food, logout, order, back } from "../../../config/images";
+import { food, logout, order } from "../../../config/images";
 
 //styles
 import { SidebarWrapper, MainNavWrapper } from "./styles";
@@ -30,7 +29,7 @@ const routes = [
   },
 ];
 
-export const Sidebar = (props) => {
+export const Sidebar = () => {
   return (
     <>
       <SidebarWrapper>

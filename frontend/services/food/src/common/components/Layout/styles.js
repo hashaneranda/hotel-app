@@ -3,9 +3,6 @@ import styled from "styled-components";
 export const Container = styled.div``;
 
 export const BodyContainer = styled.div`
-  display: grid;
-  grid-template-columns: minmax(500px, 50%) 1fr;
-
   padding: 1.8em 0;
 
   padding: 30px;

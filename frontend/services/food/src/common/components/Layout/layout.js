@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React from "react";
 
 // components
 import Sidebar from "../Sidebar/sidebar";
