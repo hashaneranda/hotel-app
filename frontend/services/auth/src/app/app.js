@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Redirect } from "react-router-dom";
 import { ThemeSwitcher, Theme, NotificationWrapper } from "@hotel/styleguide";
 import { ApolloClient, ApolloProvider } from "@hotel/api";
 
@@ -9,6 +9,7 @@ import Register from "../pages/Register/register";
 const Routes = () => {
   return (
     <BrowserRouter>
+      <Route exact path="/" render={() => <Redirect to="/login" />} />
       <Route path="/login" exact component={Login} />
       <Route path="/register" exact component={Register} />
     </BrowserRouter>

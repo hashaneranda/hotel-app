@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { useFoods } from "@hotel/api";
+import React, { useState, useEffect, useMemo } from "react";
+import { useOrders } from "@hotel/api";
 import { auth$ as auth } from "@hotel/auth-helper";
 
 // components
@@ -8,80 +8,16 @@ import OrderItem from "../../common/components/OrderItem/OrderItem";
 // styles
 import { FoodWrapper } from "./styles";
 
-const foods = [
-  {
-    id: "32312adadwad",
-    order: [
-      {
-        food: {
-          name: "MeeGroang",
-          price: 45,
-          image:
-            "https://i0.wp.com/images-prod.healthline.com/hlcmsresource/images/AN_images/eggs-breakfast-avocado-1296x728-header.jpg",
-        },
-        quantity: 2,
-      },
-      {
-        food: {
-          name: "MeeGroang",
-          price: 45,
-          image:
-            "https://i0.wp.com/images-prod.healthline.com/hlcmsresource/images/AN_images/eggs-breakfast-avocado-1296x728-header.jpg",
-        },
-        quantity: 2,
-      },
-    ],
-    createdAt: "2012-01-02",
-  },
-  {
-    id: "32312adadwad",
-    order: [
-      {
-        food: {
-          name: "MeeGroang",
-          price: 45,
-          image:
-            "https://i0.wp.com/images-prod.healthline.com/hlcmsresource/images/AN_images/eggs-breakfast-avocado-1296x728-header.jpg",
-        },
-        quantity: 2,
-      },
-      {
-        food: {
-          name: "MeeGroang",
-          price: 45,
-          image:
-            "https://i0.wp.com/images-prod.healthline.com/hlcmsresource/images/AN_images/eggs-breakfast-avocado-1296x728-header.jpg",
-        },
-        quantity: 2,
-      },
-      {
-        food: {
-          name: "MeeGroang",
-          price: 45,
-          image:
-            "https://i0.wp.com/images-prod.healthline.com/hlcmsresource/images/AN_images/eggs-breakfast-avocado-1296x728-header.jpg",
-        },
-        quantity: 2,
-      },
-      {
-        food: {
-          name: "MeeGroang",
-          price: 45,
-          image:
-            "https://i0.wp.com/images-prod.healthline.com/hlcmsresource/images/AN_images/eggs-breakfast-avocado-1296x728-header.jpg",
-        },
-        quantity: 2,
-      },
-    ],
-    createdAt: "2012-01-02",
-  },
-];
+const mapOrders = (data) => {
+  if (data) return data?.fetchAllMyOrders?.data;
+  return [];
+};
 
 export default function Orders(props) {
   const [user, setUser] = useState("");
-  const [fetchOrders, { error, data, loading }] = useFoods();
+  const [fetchOrders, { error, data, loading }] = useOrders();
 
-  // const foods = useMemo(() => mapFoods(data), [data]);
+  const foods = useMemo(() => mapOrders(data), [data]);
 
   useEffect(() => {
     fetchOrders();
@@ -91,18 +27,29 @@ export default function Orders(props) {
     });
   }, []);
 
+  if (loading)
+    return (
+      <div>
+        <h2>Fetching your orders...</h2>
+      </div>
+    );
+
   return (
     <div>
       <p>Hello, {!!user ? user?.name : ""} 👏</p>
       <h3>My Orders</h3>
       <FoodWrapper>
-        {foods.map((food) => (
-          <OrderItem
-            id={food.id}
-            order={food.order}
-            createdAt={food.createdAt}
-          />
-        ))}
+        {foods.length > 0 ? (
+          foods.map((food) => (
+            <OrderItem
+              id={food.id}
+              order={food.order}
+              createdAt={food.createdAt}
+            />
+          ))
+        ) : (
+          <h3>No Orders</h3>
+        )}
       </FoodWrapper>
     </div>
   );

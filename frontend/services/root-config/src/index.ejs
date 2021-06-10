@@ -41,29 +41,20 @@
     <script src="https://cdn.jsdelivr.net/npm/import-map-overrides@2.3.0/dist/import-map-overrides.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/system.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/extras/amd.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/extras/dynamic-import-maps.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/extras/use-default.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/extras/transform.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/extras/global.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/extras/module-types.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/extras/named-exports.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/extras/named-register.min.js"></script>
+
     <% } else { %>
     <script src="https://cdn.jsdelivr.net/npm/import-map-overrides@2.3.0/dist/import-map-overrides.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/system.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/extras/amd.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/extras/dynamic-import-maps.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/extras/use-default.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/extras/transform.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/extras/global.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/extras/module-types.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/extras/named-exports.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/extras/named-register.min.js"></script>
+
     <% } %>
 
     <template id="single-spa-layout">
       <single-spa-router>
         <main>
+          <route path="/">
+            <application name="@hotel/auth"></application>
+          </route>
           <route path="login">
             <application name="@hotel/auth"></application>
           </route>

@@ -16,10 +16,10 @@ const Cart = React.lazy(() => import("../pages/Cart/cart"));
 const Routes = () => {
   return (
     <Suspense fallback={<Fragment />}>
+      <Route exact path="/app" render={() => <Redirect to="/app/foods" />} />
       <Route path="/app/foods" exact component={Foods} />
       <Route path="/app/orders" exact component={Orders} />
       <Route path="/app/cart" exact component={Cart} />
-      <Redirect exact from="/app" to="/app/foods" />
     </Suspense>
   );
 };
