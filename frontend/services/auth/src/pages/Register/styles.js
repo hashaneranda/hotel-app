@@ -19,7 +19,7 @@ export const Header = styled.div`
   }
 
   .navigate_link {
-    color: "#2302ff";
+    color: #2302ff;
 
     &:hover {
       cursor: pointer;

@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter, Route } from "react-router-dom";
-import { ThemeSwitcher, Theme } from "@hotel/styleguide";
+import { ThemeSwitcher, Theme, NotificationWrapper } from "@hotel/styleguide";
 import { ApolloClient, ApolloProvider } from "@hotel/api";
 
 import Login from "../pages/Login/login";
@@ -19,9 +19,11 @@ export default function Root() {
   return (
     <ThemeSwitcher>
       <Theme>
-        <ApolloProvider client={ApolloClient}>
-          <Routes />
-        </ApolloProvider>
+        <NotificationWrapper>
+          <ApolloProvider client={ApolloClient}>
+            <Routes />
+          </ApolloProvider>
+        </NotificationWrapper>
       </Theme>
     </ThemeSwitcher>
   );

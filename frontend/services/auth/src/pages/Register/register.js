@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { auth$, login } from "@hotel/auth-helper";
+import { login } from "@hotel/auth-helper";
 import { useRegister } from "@hotel/api";
 import { Button, TextInput } from "@hotel/styleguide";
 import { useFormik } from "formik";
@@ -66,6 +66,13 @@ export default function Register() {
       history.push("/app");
     }
   }, [data]);
+
+  useEffect(() => {
+    if (error) {
+      console.log({ error });
+      errorNoty({ msg: "Something went wrong, please try again!" });
+    }
+  }, [error]);
 
   return (
     <Layout image={registerBackground}>

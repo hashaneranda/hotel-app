@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
-import { auth$, login } from "@hotel/auth-helper";
+import { login } from "@hotel/auth-helper";
 import { useLogin } from "@hotel/api";
-import { Button, TextInput } from "@hotel/styleguide";
+import { Button, TextInput, errorNoty } from "@hotel/styleguide";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useHistory } from "react-router-dom";
@@ -59,6 +59,12 @@ export default function Login() {
     }
   }, [data]);
 
+  useEffect(() => {
+    if (error) {
+      errorNoty({ msg: "Invalid Credentials, please try again!" });
+    }
+  }, [error]);
+
   return (
     <Layout image={loginBackground}>
       <Card>
@@ -70,7 +76,7 @@ export default function Login() {
               className="navigate_link"
               onClick={() => history.push("/register")}
             >
-              Sign up
+              Create an account
             </span>
           </h3>
         </Header>
