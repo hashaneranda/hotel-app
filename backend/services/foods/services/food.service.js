@@ -16,6 +16,7 @@ const createFood = async (body) => {
  * @returns {Promise<Food>}
  */
 const getFoodById = async (id) => {
+  console.log("getFoodById", id);
   return Food.findById(id);
 };
 

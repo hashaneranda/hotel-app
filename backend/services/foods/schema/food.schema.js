@@ -2,7 +2,7 @@ const { gql } = require("apollo-server");
 
 const typeDefs = gql`
   type Food @key(fields: "id") {
-    id: ID!
+    id: ID
     name: String!
     price: Int!
     image: String

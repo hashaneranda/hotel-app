@@ -33,7 +33,7 @@ const getOrderByUser = async (user) => {
  * @returns {Promise<Order>}
  */
 const getAllOrder = async () => {
-  return Order.find();
+  return Order.find().populate("order.food");
 };
 
 module.exports = {
