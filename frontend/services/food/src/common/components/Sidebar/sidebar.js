@@ -11,7 +11,7 @@ import { NavLink } from "react-router-dom";
 import Tooltip from "@material-ui/core/Tooltip";
 
 //images
-import { food, logout, order } from "../../../config/images";
+import { food, logout, order, cart } from "../../../config/images";
 
 //styles
 import { SidebarWrapper, MainNavWrapper } from "./styles";
@@ -21,6 +21,11 @@ const routes = [
     path: "/app/foods",
     name: "Foods",
     img: food,
+  },
+  {
+    path: "/app/cart",
+    name: "Cart",
+    img: cart,
   },
   {
     path: "/app/orders",
