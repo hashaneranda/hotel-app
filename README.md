@@ -7,3 +7,15 @@ For the backend development I have used Apollo Federation with nodejs as Apollo 
 As per Databases I have used a noSQL database as they provides horizontal scaling and tons of flexibility. For this purpose I have took mongoDB cloud. <br />
 For the frontend, I have choose micro frontend architecture as well because it gives scalabilty and sharing components, data and easy to collaborate with multiple teams. For Microfrontend I have choosen Single-SPA. It allows to work with multiple frameworks for different services without worring much on intergration. Single-SPA uses runtime Intergration via script so it is super flexible. <br />
 For this project I have used only react for all services and Apollo client for communication with our graphql backend, styled-components for themeing and styles. <br />
+
+## Project Architecture
+
+![alt text](https://github.com/hashaneranda/hotel-app/blob/main/architecture-hotel.png?raw=true)
+
+## Project Sequence Diaghram
+
+![alt text](https://github.com/hashaneranda/hotel-app/blob/main/sequence-hotel.png?raw=true)
+
+## Project Demo
+
+- [Demo here](https://www.loom.com/share/74853739bbb34687ae7ebe158a97be8c)
