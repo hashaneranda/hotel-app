@@ -1,4 +1,4 @@
 export { default as Button } from "./components/Button/button";
-export { default as Input } from "./components/Input/input";
+export { TextInput } from "./components/FormInput/formInput";
 export { default as ThemeSwitcher } from "./theme/themeSwitcher";
 export { default as Theme } from "./theme/theme";

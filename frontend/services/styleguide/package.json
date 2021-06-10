@@ -46,6 +46,7 @@
     "webpack-merge": "^5.4.0"
   },
   "dependencies": {
+    "@material-ui/core": "^4.11.4",
     "classnames": "^2.3.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
