@@ -1,0 +1,22 @@
+{
+  "name": "hotel-frontend",
+  "version": "1.0.0",
+  "scripts": {
+    "bootstrap": "lerna bootstrap",
+    "start": "lerna run start --stream",
+    "format": "lerna run format --stream",
+    "prebuild": "rm -rf deploy && mkdir deploy deploy/auth deploy/food deploy/auth-helper",
+    "build": "lerna run build",
+    "postbuild": "cp packages/root-config/dist/* deploy && cp packages/auth/dist/* deploy/auth && cp packages/food/dist/* deploy/food && cp packages/auth-helper/dist/* deploy/auth-helper ",
+    "deploy": "yarn bootstrap && yarn build",
+    "preserve": "yarn build",
+    "serve": "npx serve deploy -s -n -C",
+    "postinstall": "lerna bootstrap"
+  },
+  "devDependencies": {
+    "npm-run-all": "^4.1.5"
+  },
+  "dependencies": {
+    "lerna": "^3.22.1"
+  }
+}
