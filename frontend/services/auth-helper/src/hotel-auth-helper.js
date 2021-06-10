@@ -15,6 +15,11 @@ export function login(token, user) {
   if (!auth$.value.pending) {
     localStorage.setItem("hotel_token", JSON.stringify(token));
     localStorage.setItem("hotel_user", JSON.stringify(user));
+
+    auth$.next({
+      sessionToken: token,
+      error: false,
+    });
   }
 }
 

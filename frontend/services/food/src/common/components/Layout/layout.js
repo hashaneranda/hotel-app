@@ -19,7 +19,7 @@ export default function Layout({ children }) {
         history.push("/app");
       }
     });
-  }, []);
+  }, [window.location.pathname]);
 
   return (
     <Container>
