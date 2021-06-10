@@ -19,3 +19,36 @@ For this project I have used only react for all services and Apollo client for c
 ## Project Demo
 
 - [Demo here](https://www.loom.com/share/74853739bbb34687ae7ebe158a97be8c)
+
+## Getting Started
+
+### Installation
+
+Clone the repo:
+
+```bash
+git clone https://github.com/hashaneranda/hotel-app
+cd hotel-app
+```
+
+Install the dependencies:
+
+```bash
+yarn install
+```
+
+and create a new file .env and copy the content of .env.sample for hotel-backend/\*
+
+### Commands
+
+Running fronend locally:
+
+```bash
+yarn start
+```
+
+Running backend locally:
+
+```bash
+cd hotel-backend/gateway && yarn start
+```
