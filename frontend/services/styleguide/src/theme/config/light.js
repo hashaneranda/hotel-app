@@ -5,7 +5,7 @@ const light = {
   ...shared,
   palette: {
     primary: {
-      main: "#233253",
+      main: "#8377D1",
     },
     typography: {
       main: "#11263C",

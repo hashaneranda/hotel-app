@@ -1,7 +1,7 @@
 import { BehaviorSubject } from "rxjs";
 
 export const auth$ = new BehaviorSubject({
-  sessionToken: localStorage.getItem("sessionToken"),
+  sessionToken: localStorage.getItem("hotel_token"),
   error: false,
   pending: false,
 });
@@ -35,17 +35,17 @@ const GET_LOGGED_IN = (username, password) =>
     }, 2500);
   });
 
-export function login(username, password) {
+export function login(token, user) {
   if (!auth$.value.pending) {
-    GET_LOGGED_IN(username, password).then((user) => {
-      auth$.next(user);
-    });
+    localStorage.setItem("hotel_token", token);
+    localStorage.setItem("hotel_user", user);
   }
 }
 
 export function logout() {
   // Trigger side-effects
-  localStorage.removeItem("sessionToken");
+  localStorage.removeItem("hotel_token");
+  localStorage.removeItem("hotel_user");
   auth$.next({
     sessionToken: null,
     error: false,

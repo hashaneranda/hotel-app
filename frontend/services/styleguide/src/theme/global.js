@@ -1,25 +1,24 @@
 import { createGlobalStyle } from "styled-components";
 
-// import Montserrat from '../assets/fonts/Montserrat/Montserrat-Regular.ttf';
-// import Manrope from '../assets/fonts/Manrope/Manrope-VariableFont_wght.ttf';
-
-// @font-face {
-//   font-family: 'Montserrat';
-//   src: local('Montserrat'), local('Montserrat'),
-//   url(${Montserrat}) format('truetype');
-//   font-weight: normal;
-//   font-style: normal;
-// }
-
-// @font-face {
-//   font-family: 'Manrope';
-//   src: local('Manrope'), local('Manrope'),
-//   url(${Manrope}) format('truetype');
-//   font-weight: normal;
-//   font-style: normal;
-// }
+import Poppins from "../assets/fonts/Poppins/Poppins-Bold.ttf";
+import Manrope from "../assets/fonts/Manrope/Manrope-VariableFont_wght.ttf";
 
 export default createGlobalStyle`
+@font-face {
+  font-family: 'Poppins';
+  src: local('Poppins'), local('Poppins'),
+  url(${Poppins}) format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Manrope';
+  src: local('Manrope'), local('Manrope'),
+  url(${Manrope}) format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
 
 
   * {

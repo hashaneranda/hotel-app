@@ -1,17 +1,10 @@
-/**
- * Author : Hashan Eranda Jayalath
- * Copyrights: SAKS Engineering
- * Version:
- * Description: Top Header of the App
- * Date: 27-01-2020
- */
-
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { logout } from "@hotel/auth-helper";
 import Tooltip from "@material-ui/core/Tooltip";
 
 //images
-import { food, logout, order, cart } from "../../../config/images";
+import { food, logout as logoutImg, order, cart } from "../../../config/images";
 
 //styles
 import { SidebarWrapper, MainNavWrapper } from "./styles";
@@ -53,10 +46,11 @@ export const Sidebar = () => {
         </MainNavWrapper>
         <NavLink
           className="navLink d-flex flex-row align-items-center  justify-content-center"
-          to="/"
+          to="/login"
+          onClick={() => logout()}
         >
           <Tooltip title="Logout" placement="right" arrow>
-            <img src={logout} alt="back" className="navLogo" />
+            <img src={logoutImg} alt="back" className="navLogo" />
           </Tooltip>
         </NavLink>
       </SidebarWrapper>

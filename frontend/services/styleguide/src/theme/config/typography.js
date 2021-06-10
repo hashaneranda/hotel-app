@@ -1,7 +1,7 @@
 const theme = {
   typography: {
     body: "Manrope",
-    heading: "Montserrat",
+    heading: "Poppins",
   },
 };
 

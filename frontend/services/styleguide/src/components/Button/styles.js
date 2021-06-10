@@ -38,4 +38,9 @@ export const StyledButton = styled.button`
     box-shadow: 0 0 0 3px coral;
     outline: none;
   }
+
+  &:hover {
+    opacity: 0.8;
+    cursor: pointer;
+  }
 `;

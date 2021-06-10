@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { auth$, login } from "@hotel/auth-helper";
+import { useRegister } from "@hotel/api";
 import { Button, TextInput } from "@hotel/styleguide";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -46,14 +47,25 @@ const formData = [
 
 export default function Register() {
   const history = useHistory();
+
+  // graphql
+  const [registerUser, { error, data, loading }] = useRegister();
+
   const formik = useFormik({
     initialValues: initialData,
     enableReinitialize: true,
     validationSchema: validationSchema,
     onSubmit: (v) => {
-      console.log("values", v);
+      registerUser(v.name, v.email, v.password);
     },
   });
+
+  useEffect(() => {
+    if (data) {
+      login(data.createUser.token, data.createUser.user);
+      history.push("/app");
+    }
+  }, [data]);
 
   return (
     <Layout image={registerBackground}>

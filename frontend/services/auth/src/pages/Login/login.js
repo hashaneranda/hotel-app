@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { auth$, login } from "@hotel/auth-helper";
+import { useLogin } from "@hotel/api";
 import { Button, TextInput } from "@hotel/styleguide";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -39,14 +40,24 @@ const formData = [
 
 export default function Login() {
   const history = useHistory();
+  // graphql
+  const [loginUser, { error, data, loading }] = useLogin();
+
   const formik = useFormik({
     initialValues: initialData,
     enableReinitialize: true,
     validationSchema: validationSchema,
     onSubmit: (v) => {
-      console.log("values", v);
+      loginUser(v.email, v.password);
     },
   });
+
+  useEffect(() => {
+    if (data) {
+      login(data.loginUser.token, data.loginUser.user);
+      history.push("/app");
+    }
+  }, [data]);
 
   return (
     <Layout image={loginBackground}>

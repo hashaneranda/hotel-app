@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import Fab from "@material-ui/core/Fab";
+import { Button } from "@hotel/styleguide";
 
 // context
 import { CartContext } from "../../common/context/cartContext";
@@ -64,7 +65,16 @@ export default function Cart() {
           <h1>Cart Empty</h1>
         )}
       </FoodWrapper>
-      <CartSummary></CartSummary>
+      {cartItems.length > 0 && (
+        <CartSummary>
+          <div>
+            <h3>
+              Total: <span>$500</span>
+            </h3>
+          </div>
+          <Button>Buy Now</Button>
+        </CartSummary>
+      )}
     </Container>
   );
 }

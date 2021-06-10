@@ -4,6 +4,7 @@
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "start": "lerna run start --stream",
+    "format": "lerna run format --stream",
     "prebuild": "rm -rf deploy && mkdir deploy deploy/auth deploy/food deploy/auth-helper",
     "build": "lerna run build",
     "postbuild": "cp packages/root-config/dist/* deploy && cp packages/auth/dist/* deploy/auth && cp packages/food/dist/* deploy/food && cp packages/auth-helper/dist/* deploy/auth-helper ",
