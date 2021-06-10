@@ -1,6 +1,9 @@
 import React, { Fragment, Suspense } from "react";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Redirect } from "react-router-dom";
 import { ThemeSwitcher, Theme } from "@hotel/styleguide";
+
+//context
+import CartContextProvider from "../common/context/cartContext";
 
 // components
 import Layout from "../common/components/Layout/layout";
@@ -15,6 +18,7 @@ const Routes = () => {
       <Route path="/app/foods" exact component={Foods} />
       <Route path="/app/orders" exact component={Orders} />
       <Route path="/app/cart" exact component={Cart} />
+      <Redirect exact from="/app" to="/app/foods" />
     </Suspense>
   );
 };
@@ -23,11 +27,13 @@ export default function Root() {
   return (
     <ThemeSwitcher>
       <Theme>
-        <BrowserRouter>
-          <Layout>
-            <Routes />
-          </Layout>
-        </BrowserRouter>
+        <CartContextProvider>
+          <BrowserRouter>
+            <Layout>
+              <Routes />
+            </Layout>
+          </BrowserRouter>
+        </CartContextProvider>
       </Theme>
     </ThemeSwitcher>
   );

@@ -1,8 +1,16 @@
 import styled from "styled-components";
 
+import Fab from "@material-ui/core/Fab";
+
 export const Container = styled.div`
   display: grid;
   grid-template-rows: auto 1fr auto;
+`;
+
+export const CartHeader = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 `;
 
 export const FoodWrapper = styled.div`

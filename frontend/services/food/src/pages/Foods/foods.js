@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 
+// context
+import { CartContext } from "../../common/context/cartContext";
 // components
 import FoodCard from "../../common/components/FoodCard/foodCard";
 
@@ -8,6 +10,7 @@ import { FoodWrapper } from "./styles";
 
 const foods = [
   {
+    id: 1,
     name: "MeeGroang",
     price: 45,
     image:
@@ -15,6 +18,7 @@ const foods = [
     buttonAction: () => console.log("item added"),
   },
   {
+    id: 1,
     name: "MeeGroang",
     price: 45,
     image:
@@ -22,6 +26,7 @@ const foods = [
     buttonAction: () => console.log("item added"),
   },
   {
+    id: 1,
     name: "MeeGroang",
     price: 45,
     image:
@@ -29,6 +34,7 @@ const foods = [
     buttonAction: () => console.log("item added"),
   },
   {
+    id: 1,
     name: "MeeGroang",
     price: 45,
     image:
@@ -36,6 +42,7 @@ const foods = [
     buttonAction: () => console.log("item added"),
   },
   {
+    id: 1,
     name: "MeeGroang",
     price: 45,
     image:
@@ -43,6 +50,7 @@ const foods = [
     buttonAction: () => console.log("item added"),
   },
   {
+    id: 1,
     name: "MeeGroang",
     price: 45,
     image:
@@ -51,8 +59,10 @@ const foods = [
   },
 ];
 
-export default function Food(props) {
+export default function Food() {
   const user = "Jhon";
+  const { addProduct } = useContext(CartContext);
+
   return (
     <div>
       <p>Hello, {user} 👏</p>
@@ -63,7 +73,7 @@ export default function Food(props) {
             name={food.name}
             price={food.price}
             image={food.image}
-            buttonAction={food.buttonAction}
+            buttonAction={() => addProduct(food)}
           />
         ))}
       </FoodWrapper>
