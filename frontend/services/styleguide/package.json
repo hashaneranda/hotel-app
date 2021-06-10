@@ -46,6 +46,7 @@
     "webpack-merge": "^5.4.0"
   },
   "dependencies": {
+    "classnames": "^2.3.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "styled-components": "^5.3.0",
