@@ -1,53 +1,91 @@
 import React, { useState, useEffect } from "react";
 import { auth$, login } from "@hotel/auth-helper";
-import { Button } from "@hotel/styleguide";
+import { Button, TextInput } from "@hotel/styleguide";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { useHistory } from "react-router-dom";
 
 import Loader from "../../common/components/Loader/loader";
 import Layout from "../../common/components/Layout/layout";
 
+// assests
+import { loginBackground } from "../../config/images";
+
+// styles
+import { Card, Header, Form, ButtonContainer } from "./styles";
+
+export const initialData = {
+  email: "",
+  password: "",
+};
+
+export const validationSchema = Yup.object().shape({
+  email: Yup.string().email().required("Email is Required"),
+  password: Yup.string().required("Password is Required"),
+});
+
+const formData = [
+  {
+    name: "email",
+    label: "Email",
+    type: "text",
+  },
+  {
+    name: "password",
+    label: "Password",
+    type: "password",
+  },
+];
+
 export default function Login() {
-  const [pending, setPending] = useState(false);
-  const [error, setError] = useState();
-
-  useEffect(() => {
-    let timeout;
-    const sub = auth$.subscribe(({ pending, error }) => {
-      // redirecting to /home when logged in will be done in the navbar. Cohesive code FTW!
-      setPending(pending);
-      setError(error);
-      timeout = setTimeout(() => {
-        setError();
-      }, 2000);
-    });
-    return () => {
-      clearInterval(timeout);
-      sub.unsubscribe();
-    };
-  }, []);
-
-  const onSubmit = (e) => {
-    e.preventDefault();
-    const { username, password } = document.forms.login.elements;
-    login(username.value, password.value);
-  };
+  const history = useHistory();
+  const formik = useFormik({
+    initialValues: initialData,
+    enableReinitialize: true,
+    validationSchema: validationSchema,
+    onSubmit: (v) => {
+      console.log("values", v);
+    },
+  });
 
   return (
-    <Layout>
-      <div>
-        <h1>Login</h1>
-        <form name="login" className="login-form" onSubmit={onSubmit}>
-          <label htmlFor="username">Username</label>
-          <input id="username" type="text" required />
-          <label htmlFor="password">Password</label>
-          <input id="password" type="password" required />
-          <div>
-            <Button type="submit" className="submit" disabled={pending}>
-              {pending ? <Loader /> : "Submit"}
+    <Layout image={loginBackground}>
+      <Card>
+        <Header>
+          <h1>Login</h1>
+          <h3>
+            Don't have a account?{" "}
+            <span
+              className="navigate_link"
+              onClick={() => history.push("/register")}
+            >
+              Sign up
+            </span>
+          </h3>
+        </Header>
+
+        <Form onSubmit={formik.handleSubmit}>
+          {formData.map((input) => (
+            <TextInput
+              required
+              className="contact__input"
+              label={input.label}
+              name={input.name}
+              type={input.type}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values[input.name]}
+              inputError={formik.errors[input.name]}
+            />
+          ))}
+
+          <ButtonContainer>
+            <Button type="submit" className="submit">
+              Login
             </Button>
-          </div>
-          {error && <div className="login-error">{error}</div>}
-        </form>
-      </div>
+          </ButtonContainer>
+        </Form>
+      </Card>
     </Layout>
   );
 }

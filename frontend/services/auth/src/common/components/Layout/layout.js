@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 // styles
 import { Container, Header, BodyContainer, DataWrapper } from "./styles";
 
-export default function Layout({ children }) {
+export default function Layout({ children, image }) {
   return (
     <Container>
       <Header>
@@ -11,7 +11,7 @@ export default function Layout({ children }) {
       </Header>
       <BodyContainer>
         <DataWrapper>
-          <p>Image goes here</p>
+          <img src={image} alt="background" />
         </DataWrapper>
         <DataWrapper>{children}</DataWrapper>
       </BodyContainer>
