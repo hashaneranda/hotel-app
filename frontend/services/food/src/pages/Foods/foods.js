@@ -1,4 +1,6 @@
-import React, { useContext } from "react";
+import React, { useContext, useMemo, useEffect, useState } from "react";
+import { useFoods } from "@hotel/api";
+import { auth$ as auth } from "@hotel/auth-helper";
 
 // context
 import { CartContext } from "../../common/context/cartContext";
@@ -8,74 +10,50 @@ import FoodCard from "../../common/components/FoodCard/foodCard";
 // styles
 import { FoodWrapper } from "./styles";
 
-const foods = [
-  {
-    id: 1,
-    name: "MeeGroang",
-    price: 45,
-    image:
-      "https://i0.wp.com/images-prod.healthline.com/hlcmsresource/images/AN_images/eggs-breakfast-avocado-1296x728-header.jpg",
-    buttonAction: () => console.log("item added"),
-  },
-  {
-    id: 1,
-    name: "MeeGroang",
-    price: 45,
-    image:
-      "https://i0.wp.com/images-prod.healthline.com/hlcmsresource/images/AN_images/eggs-breakfast-avocado-1296x728-header.jpg",
-    buttonAction: () => console.log("item added"),
-  },
-  {
-    id: 1,
-    name: "MeeGroang",
-    price: 45,
-    image:
-      "https://i0.wp.com/images-prod.healthline.com/hlcmsresource/images/AN_images/eggs-breakfast-avocado-1296x728-header.jpg",
-    buttonAction: () => console.log("item added"),
-  },
-  {
-    id: 1,
-    name: "MeeGroang",
-    price: 45,
-    image:
-      "https://i0.wp.com/images-prod.healthline.com/hlcmsresource/images/AN_images/eggs-breakfast-avocado-1296x728-header.jpg",
-    buttonAction: () => console.log("item added"),
-  },
-  {
-    id: 1,
-    name: "MeeGroang",
-    price: 45,
-    image:
-      "https://i0.wp.com/images-prod.healthline.com/hlcmsresource/images/AN_images/eggs-breakfast-avocado-1296x728-header.jpg",
-    buttonAction: () => console.log("item added"),
-  },
-  {
-    id: 1,
-    name: "MeeGroang",
-    price: 45,
-    image:
-      "https://i0.wp.com/images-prod.healthline.com/hlcmsresource/images/AN_images/eggs-breakfast-avocado-1296x728-header.jpg",
-    buttonAction: () => console.log("item added"),
-  },
-];
+const mapFoods = (data) => {
+  if (data) return data?.fetchAllFoods?.data;
+  return [];
+};
 
 export default function Food() {
-  const user = "Jhon";
+  const [user, setUser] = useState("");
   const { addProduct } = useContext(CartContext);
+  const [fetchFoods, { error, data, loading }] = useFoods();
+
+  const foods = useMemo(() => mapFoods(data), [data]);
+
+  useEffect(() => {
+    fetchFoods();
+
+    auth.subscribe(({ user }) => {
+      setUser(user);
+    });
+  }, []);
+
+  if (loading)
+    return (
+      <div>
+        <h2>Fetching food items...</h2>
+      </div>
+    );
 
   return (
     <div>
-      <p>Hello, {user} 👏</p>
+      <p>Hello, {!!user ? user?.name : ""} 👏</p>
       <h3>Find your favorite food!</h3>
       <FoodWrapper>
-        {foods.map((food) => (
-          <FoodCard
-            name={food.name}
-            price={food.price}
-            image={food.image}
-            buttonAction={() => addProduct(food)}
-          />
-        ))}
+        {foods.length > 0 ? (
+          foods.map((food) => (
+            <FoodCard
+              name={food.name}
+              price={food.price}
+              image={food.image}
+              buttonAction={() => addProduct(food)}
+            />
+          ))
+        ) : (
+          <h1>No food items available.</h1>
+        )}
       </FoodWrapper>
     </div>
   );

@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useFoods } from "@hotel/api";
+import { auth$ as auth } from "@hotel/auth-helper";
 
 // components
 import OrderItem from "../../common/components/OrderItem/OrderItem";
@@ -76,10 +78,22 @@ const foods = [
 ];
 
 export default function Orders(props) {
-  const user = "Jhon";
+  const [user, setUser] = useState("");
+  const [fetchOrders, { error, data, loading }] = useFoods();
+
+  // const foods = useMemo(() => mapFoods(data), [data]);
+
+  useEffect(() => {
+    fetchOrders();
+
+    auth.subscribe(({ user }) => {
+      setUser(user);
+    });
+  }, []);
+
   return (
     <div>
-      <p>Hello, {user} 👏</p>
+      <p>Hello, {!!user ? user?.name : ""} 👏</p>
       <h3>My Orders</h3>
       <FoodWrapper>
         {foods.map((food) => (

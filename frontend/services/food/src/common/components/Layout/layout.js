@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { auth$ as auth } from "@hotel/auth-helper";
+import { useHistory } from "react-router-dom";
 
 // components
 import Sidebar from "../Sidebar/sidebar";
@@ -7,6 +9,18 @@ import Sidebar from "../Sidebar/sidebar";
 import { Container, BodyContainer } from "./styles";
 
 export default function Layout({ children }) {
+  const history = useHistory();
+
+  useEffect(() => {
+    auth.subscribe(({ sessionToken }) => {
+      const needsLogin = !sessionToken;
+      if (needsLogin) history.push("/login");
+      else if (!needsLogin && window.location.pathname === "/login") {
+        history.push("/app");
+      }
+    });
+  }, []);
+
   return (
     <Container>
       <Sidebar />

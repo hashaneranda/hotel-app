@@ -1,7 +1,9 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import Fab from "@material-ui/core/Fab";
 import { Button } from "@hotel/styleguide";
+import { useFoods } from "@hotel/api";
+import { auth$ as auth } from "@hotel/auth-helper";
 
 // context
 import { CartContext } from "../../common/context/cartContext";
@@ -34,15 +36,21 @@ const foods = [
 ];
 
 export default function Cart() {
-  const user = "Jhon";
+  const [user, setUser] = useState("");
   const { total, cartItems, clearCart, removeProduct } =
     useContext(CartContext);
+
+  useEffect(() => {
+    auth.subscribe(({ user }) => {
+      setUser(user);
+    });
+  }, []);
 
   return (
     <Container>
       <CartHeader>
         <div>
-          <p>Hello, {user} 👏</p>
+          <p>Hello, {!!user ? user?.name : ""} 👏</p>
           <h3>My Cart</h3>
         </div>
         <Fab aria-label="clear" onClick={() => clearCart()}>
