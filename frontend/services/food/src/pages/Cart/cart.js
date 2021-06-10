@@ -1,8 +1,9 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, useMemo } from "react";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import Fab from "@material-ui/core/Fab";
-import { Button } from "@hotel/styleguide";
-import { useFoods } from "@hotel/api";
+import { useHistory } from "react-router-dom";
+import { Button, errorNoty, successNoty } from "@hotel/styleguide";
+import { useAddOrder } from "@hotel/api";
 import { auth$ as auth } from "@hotel/auth-helper";
 
 // context
@@ -14,37 +15,53 @@ import CartItem from "../../common/components/CartItem/CartItem";
 // styles
 import { FoodWrapper, Container, CartSummary, CartHeader } from "./styles";
 
-const foods = [
-  {
-    id: 1,
-    name: "MeeGroang",
-    price: 45,
-    image:
-      "https://i0.wp.com/images-prod.healthline.com/hlcmsresource/images/AN_images/eggs-breakfast-avocado-1296x728-header.jpg",
-    buttonAction: () => console.log("item added"),
-    quantity: 10,
-  },
-  {
-    id: 1,
-    name: "MeeGroang",
-    price: 45,
-    image:
-      "https://i0.wp.com/images-prod.healthline.com/hlcmsresource/images/AN_images/eggs-breakfast-avocado-1296x728-header.jpg",
-    buttonAction: () => console.log("item added"),
-    quantity: 10,
-  },
-];
+const calcTotalPrice = (cart) => {
+  let total = 0;
+
+  cart.forEach((item) => {
+    total += item.price * item.quantity;
+  });
+
+  return total;
+};
 
 export default function Cart() {
   const [user, setUser] = useState("");
-  const { total, cartItems, clearCart, removeProduct } =
-    useContext(CartContext);
+  const history = useHistory();
+  const { cartItems, clearCart, removeProduct } = useContext(CartContext);
+  const totalPrice = useMemo(() => calcTotalPrice(cartItems), [cartItems]);
+
+  const [addOrder, { error, data, loading }] = useAddOrder();
 
   useEffect(() => {
     auth.subscribe(({ user }) => {
       setUser(user);
     });
   }, []);
+
+  useEffect(() => {
+    if (data) {
+      clearCart();
+      history.push("/app/orders");
+      successNoty({ msg: "Your order has been placed." });
+    }
+  }, [data]);
+
+  useEffect(() => {
+    if (error) {
+      errorNoty({ msg: "Something went wrong! Please try again" });
+    }
+  }, [error]);
+
+  const handleBuyNow = () => {
+    if (cartItems.length > 0) {
+      const payload = cartItems.map((item) => ({
+        food: item.id,
+        quantity: item.quantity,
+      }));
+      addOrder(payload);
+    }
+  };
 
   return (
     <Container>
@@ -77,10 +94,12 @@ export default function Cart() {
         <CartSummary>
           <div>
             <h3>
-              Total: <span>$500</span>
+              Total: <span>${totalPrice}</span>
             </h3>
           </div>
-          <Button>Buy Now</Button>
+          <Button onClick={() => handleBuyNow()} disabled={loading}>
+            {loading ? "Placing Order.." : "Buy Now"}
+          </Button>
         </CartSummary>
       )}
     </Container>

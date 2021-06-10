@@ -1,6 +1,6 @@
 import React, { Fragment, Suspense } from "react";
 import { BrowserRouter, Route, Redirect } from "react-router-dom";
-import { ThemeSwitcher, Theme } from "@hotel/styleguide";
+import { ThemeSwitcher, Theme, NotificationWrapper } from "@hotel/styleguide";
 import { ApolloClient, ApolloProvider } from "@hotel/api";
 
 //context
@@ -28,15 +28,17 @@ export default function Root() {
   return (
     <ThemeSwitcher>
       <Theme>
-        <ApolloProvider client={ApolloClient}>
-          <CartContextProvider>
-            <BrowserRouter>
-              <Layout>
-                <Routes />
-              </Layout>
-            </BrowserRouter>
-          </CartContextProvider>
-        </ApolloProvider>
+        <NotificationWrapper>
+          <ApolloProvider client={ApolloClient}>
+            <CartContextProvider>
+              <BrowserRouter>
+                <Layout>
+                  <Routes />
+                </Layout>
+              </BrowserRouter>
+            </CartContextProvider>
+          </ApolloProvider>
+        </NotificationWrapper>
       </Theme>
     </ThemeSwitcher>
   );

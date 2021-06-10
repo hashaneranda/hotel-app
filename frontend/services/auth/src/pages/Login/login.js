@@ -6,7 +6,6 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useHistory } from "react-router-dom";
 
-import Loader from "../../common/components/Loader/loader";
 import Layout from "../../common/components/Layout/layout";
 
 // assests
@@ -97,8 +96,8 @@ export default function Login() {
           ))}
 
           <ButtonContainer>
-            <Button type="submit" className="submit">
-              Login
+            <Button type="submit" className="submit" disabled={loading}>
+              {loading ? "Logging in..." : "Login"}
             </Button>
           </ButtonContainer>
         </Form>
