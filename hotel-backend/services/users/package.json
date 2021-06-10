@@ -1,11 +1,12 @@
 {
-  "name": "users",
+  "name": "hotel-backend-user",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "start": "nodemon index.js"
   },
   "keywords": [],
   "author": "",

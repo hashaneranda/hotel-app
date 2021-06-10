@@ -1,12 +1,13 @@
 {
-  "name": "blog",
+  "name": "hotel-gateway",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon index.js",
-    "start": "concurrently \"npm:start-*\"",
+    "start": "lerna run start --stream",
+    "start-all": "concurrently \"npm:start-*\"",
     "start-gateway": "wait-on tcp:4001 && wait-on tcp:4002 && nodemon gateway.js",
     "start-service-users": "nodemon ../services/users/index.js",
     "start-service-foods": "nodemon ../services/foods/index.js",
