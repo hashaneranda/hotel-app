@@ -26,3 +26,22 @@ export const CartSummary = styled.div`
   flex-direaction: row;
   justify-content: space-between;
 `;
+
+export const InfoContainer = styled.div`
+  min-height: 80vh;
+  min-width: 100%;
+
+  display: grid;
+  place-items: center;
+`;
+
+export const InfoWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2em;
+
+  img {
+    width: 20em;
+  }
+`;

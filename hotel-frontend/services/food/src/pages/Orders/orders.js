@@ -1,12 +1,16 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { useOrders } from "@hotel/api";
 import { auth$ as auth } from "@hotel/auth-helper";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 // components
 import OrderItem from "../../common/components/OrderItem/OrderItem";
 
+// assets
+import { noOrders } from "../../config/images";
+
 // styles
-import { FoodWrapper } from "./styles";
+import { FoodWrapper, InfoContainer, InfoWrapper } from "./styles";
 
 const mapOrders = (data) => {
   if (data) return data?.fetchAllMyOrders?.data;
@@ -29,9 +33,12 @@ export default function Orders(props) {
 
   if (loading)
     return (
-      <div>
-        <h2>Fetching your orders...</h2>
-      </div>
+      <InfoContainer>
+        <InfoWrapper>
+          <CircularProgress />
+          <h2>Fetching your orders...</h2>
+        </InfoWrapper>
+      </InfoContainer>
     );
 
   return (
@@ -48,7 +55,12 @@ export default function Orders(props) {
             />
           ))
         ) : (
-          <h3>No Orders</h3>
+          <InfoContainer>
+            <InfoWrapper>
+              <img src={noOrders} alt="empty" />
+              <h3>No Orders</h3>
+            </InfoWrapper>
+          </InfoContainer>
         )}
       </FoodWrapper>
     </div>

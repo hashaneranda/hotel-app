@@ -8,3 +8,22 @@ export const FoodWrapper = styled.div`
   flex-direction: column;
   gap: 1.9rem;
 `;
+
+export const InfoContainer = styled.div`
+  min-height: 80vh;
+  min-width: 100%;
+
+  display: grid;
+  place-items: center;
+`;
+
+export const InfoWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2em;
+
+  img {
+    width: 20em;
+  }
+`;

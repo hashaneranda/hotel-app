@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { logout } from "@hotel/auth-helper";
 import Tooltip from "@material-ui/core/Tooltip";
@@ -8,6 +8,9 @@ import { food, logout as logoutImg, order, cart } from "../../../config/images";
 
 //styles
 import { SidebarWrapper, MainNavWrapper } from "./styles";
+
+// context
+import { CartContext } from "../../context/cartContext";
 
 const routes = [
   {
@@ -28,6 +31,8 @@ const routes = [
 ];
 
 export const Sidebar = () => {
+  const { clearCart } = useContext(CartContext);
+
   return (
     <>
       <SidebarWrapper>
@@ -47,7 +52,10 @@ export const Sidebar = () => {
         <NavLink
           className="navLink d-flex flex-row align-items-center  justify-content-center"
           to="/login"
-          onClick={() => logout()}
+          onClick={() => {
+            clearCart();
+            logout();
+          }}
         >
           <Tooltip title="Logout" placement="right" arrow>
             <img src={logoutImg} alt="back" className="navLogo" />

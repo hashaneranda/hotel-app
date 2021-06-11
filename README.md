@@ -18,7 +18,7 @@ For this project I have used only react for all services and Apollo client for c
 
 ## Project Demo
 
-- [Demo here](https://www.loom.com/share/74853739bbb34687ae7ebe158a97be8c)
+- [Demo here](https://www.loom.com/share/c6d0f18835db4b5c8acf8b8c487489e8)
 
 ## Getting Started
 
@@ -45,4 +45,24 @@ Running app locally:
 
 ```bash
 yarn start
+```
+
+the app will run on http://localhost:9000
+
+## Project Structure
+
+```
+hotel-backend\
+ |--services\       # Apollo Federation services and gateway
+    |--foods\       # Foods service
+    |--gateway\     # Graphql gateway
+    |--users\       # users service
+hotel-backend\
+ |--services\       # Single SPA microfrontend
+    |--api\         # Graphql apollo client service
+    |--auth\        # Authentication app
+    |--food\        # Food order app
+    |--root-config\ # root config for single spa
+    |--styleguide\  # Common components and styles
+
 ```

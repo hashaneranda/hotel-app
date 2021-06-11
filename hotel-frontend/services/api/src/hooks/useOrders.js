@@ -30,6 +30,7 @@ export default () => {
   const newQuery = () => {
     func({
       errorPolicy: "all",
+      fetchPolicy: "no-cache",
     });
   };
 

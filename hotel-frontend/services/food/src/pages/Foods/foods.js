@@ -1,6 +1,7 @@
 import React, { useContext, useMemo, useEffect, useState } from "react";
 import { useFoods } from "@hotel/api";
 import { auth$ as auth } from "@hotel/auth-helper";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 // context
 import { CartContext } from "../../common/context/cartContext";
@@ -8,7 +9,7 @@ import { CartContext } from "../../common/context/cartContext";
 import FoodCard from "../../common/components/FoodCard/foodCard";
 
 // styles
-import { FoodWrapper } from "./styles";
+import { FoodWrapper, InfoContainer, InfoWrapper } from "./styles";
 
 const mapFoods = (data) => {
   if (data) return data?.fetchAllFoods?.data;
@@ -32,9 +33,12 @@ export default function Food() {
 
   if (loading)
     return (
-      <div>
-        <h2>Fetching food items...</h2>
-      </div>
+      <InfoContainer>
+        <InfoWrapper>
+          <CircularProgress />
+          <h2>Fetching food items...</h2>
+        </InfoWrapper>
+      </InfoContainer>
     );
 
   return (

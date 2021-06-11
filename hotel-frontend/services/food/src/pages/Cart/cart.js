@@ -12,8 +12,18 @@ import { CartContext } from "../../common/context/cartContext";
 // components
 import CartItem from "../../common/components/CartItem/CartItem";
 
+// assets
+import { emptyCart } from "../../config/images";
+
 // styles
-import { FoodWrapper, Container, CartSummary, CartHeader } from "./styles";
+import {
+  FoodWrapper,
+  Container,
+  CartSummary,
+  CartHeader,
+  InfoContainer,
+  InfoWrapper,
+} from "./styles";
 
 const calcTotalPrice = (cart) => {
   let total = 0;
@@ -87,7 +97,12 @@ export default function Cart() {
             />
           ))
         ) : (
-          <h1>Cart Empty</h1>
+          <InfoContainer>
+            <InfoWrapper>
+              <img src={emptyCart} alt="empty" />
+              <h1>Cart Empty</h1>
+            </InfoWrapper>
+          </InfoContainer>
         )}
       </FoodWrapper>
       {cartItems.length > 0 && (
