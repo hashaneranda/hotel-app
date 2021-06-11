@@ -37,18 +37,12 @@ Install the dependencies:
 yarn install
 ```
 
-and create a new file .env and copy the content of .env.sample for hotel-backend/\*
+and create a new file .env and copy the content of .env.sample for hotel-backend/services/\*
 
 ### Commands
 
-Running fronend locally:
+Running app locally:
 
 ```bash
 yarn start
-```
-
-Running backend locally:
-
-```bash
-cd hotel-backend/gateway && yarn start
 ```
